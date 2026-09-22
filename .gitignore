@@ -1,2 +1,10 @@
 # Virtual Environments
 venv/
+
+# Builds
+build/
+
+# Python Cache
+__pycache__/
+*.egg-info/
+.pytest_cache/

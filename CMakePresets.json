@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "resin",
+            "displayName": "Resin build tree root",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/resin"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "resin",
+            "configurePreset": "resin"
+        }
+    ]
+}
