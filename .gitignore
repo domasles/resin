@@ -3,6 +3,7 @@ venv/
 
 # Builds
 build/
+dist/
 
 # Python Cache
 __pycache__/
