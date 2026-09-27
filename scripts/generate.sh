@@ -25,14 +25,15 @@ mkdir -p "$OUT_DIR"
 echo "Generating CMake [$CONFIG] project"
 
 cmake -S "$PROJECT_ROOT/micropython/ports/rp2" \
-      -B "$BUILD_DIR" \
-      -G Ninja \
-      -D MICROPY_BOARD=SPRIG \
-      -D MICROPY_BOARD_DIR="$BOARD_DIR/SPRIG" \
-      -D USER_C_MODULES="$USER_C_MODULES_PATH" \
-      -D CMAKE_BUILD_TYPE="$BUILD_TYPE" \
-      -D RESIN_DIST_DIR="$OUT_DIR" \
-      -D RESIN_BUILD_TYPE="$(echo "$CONFIG" | tr '[:lower:]' '[:upper:]')"
+    -B "$BUILD_DIR" \
+    -G Ninja \
+    -D MICROPY_BOARD=SPRIG \
+    -D MICROPY_BOARD_DIR="$BOARD_DIR/SPRIG" \
+    -D USER_C_MODULES="$USER_C_MODULES_PATH" \
+    -D MICROPY_FROZEN_MANIFEST="$PROJECT_ROOT/resin_py/manifest.py" \
+    -D CMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -D RESIN_DIST_DIR="$OUT_DIR" \
+    -D RESIN_BUILD_TYPE="$(echo "$CONFIG" | tr '[:lower:]' '[:upper:]')"
 
 echo ""
 echo "Project generation completed for [$CONFIG]!"
