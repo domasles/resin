@@ -32,21 +32,21 @@ def update() -> None:
     _released_mask = (~_curr_held) & _prev_held
 
 
-def is_held(button: int) -> bool:
+def is_held(button: Button) -> bool:
     """Returns True if `button` is currently held down."""
     return bool(_curr_held & button)
 
 
-def is_pressed(button: int) -> bool:
+def is_pressed(button: Button) -> bool:
     """Returns True if `button` was pressed on this frame."""
     return bool(_pressed_mask & button)
 
 
-def is_released(button: int) -> bool:
+def is_released(button: Button) -> bool:
     """Returns True if `button` was released on this frame."""
     return bool(_released_mask & button)
 
 
-def get_state() -> int:
+def get_button_bitmask() -> int:
     """Returns the raw bitmask of currently held buttons."""
     return _curr_held

@@ -31,5 +31,6 @@ uint8_t rh_cdc_read(void) {
 
     uint8_t byte = ring[tail];
     tail = (tail + 1) % RH_CDC_RING_SIZE;
+
     return byte;
 }

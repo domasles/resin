@@ -3,7 +3,7 @@ from .input import (
     is_held,
     is_pressed,
     is_released,
-    get_state,
+    get_button_bitmask
 )
 
 __all__ = [
@@ -11,5 +11,5 @@ __all__ = [
     "is_held",
     "is_pressed",
     "is_released",
-    "get_state"
+    "get_button_bitmask"
 ]
