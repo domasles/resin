@@ -12,9 +12,8 @@ static mp_obj_t resin_hw_init(void) {
     rh_display_init();
     rh_dma_init();
     rh_input_init();
-    rh_cdc_init();
 
-    set_sys_clock_khz(270000, true);
+    set_sys_clock_khz(200000, true);
 
     initialized = true;
     return mp_const_none;
@@ -56,15 +55,6 @@ static mp_obj_t resin_hw_get_input(void) {
 
 static MP_DEFINE_CONST_FUN_OBJ_0(resin_hw_get_input_obj, resin_hw_get_input);
 
-static mp_obj_t resin_hw_set_madctl(mp_obj_t value) {
-    if (!initialized) return mp_const_none;
-    rh_display_madctl((uint8_t)mp_obj_get_int(value));
-
-    return mp_const_none;
-}
-
-static MP_DEFINE_CONST_FUN_OBJ_1(resin_hw_set_madctl_obj, resin_hw_set_madctl);
-
 static const mp_rom_map_elem_t resin_hw_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_resin_hw)},
     {MP_ROM_QSTR(MP_QSTR_WIDTH), MP_ROM_INT(RESIN_W)},
@@ -81,7 +71,6 @@ static const mp_rom_map_elem_t resin_hw_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_clear_screen), MP_ROM_PTR(&resin_hw_clear_screen_obj)},
     {MP_ROM_QSTR(MP_QSTR_present), MP_ROM_PTR(&resin_hw_present_obj)},
     {MP_ROM_QSTR(MP_QSTR_get_input), MP_ROM_PTR(&resin_hw_get_input_obj)},
-    {MP_ROM_QSTR(MP_QSTR_set_madctl), MP_ROM_PTR(&resin_hw_set_madctl_obj)},
 };
 
 static MP_DEFINE_CONST_DICT(resin_hw_module_globals, resin_hw_module_globals_table);

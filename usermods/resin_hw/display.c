@@ -168,8 +168,3 @@ void rh_display_init(void) {
     write_command(ST7735_DISPON);
     sleep_ms(100);
 }
-
-void rh_display_madctl(uint8_t value) {
-    write_command(ST7735_MADCTL);
-    write_data(value);
-}

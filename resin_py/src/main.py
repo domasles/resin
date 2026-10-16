@@ -18,9 +18,9 @@ def loop():
         start_time = time.ticks_ms()
 
         try:
-            resin_hw.clear_screen(0)
+            resin_hw.clear_screen(resin.config.bg_color)
             resin.hardware.input.update()
-            # Current loaded scene's update() goes here
+            main()
             resin_hw.present()
 
         except Exception as e:

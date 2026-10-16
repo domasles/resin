@@ -12,7 +12,6 @@
     void rh_display_init(void);
     void rh_display_window_start(int x, int y, int w, int h);
     void rh_display_finish(void);
-    void rh_display_madctl(uint8_t value);
 
     void rh_dma_init(void);
     void rh_dma_clear(uint8_t color_idx);
@@ -21,15 +20,8 @@
 
     void rh_input_init(void);
 
-    void rh_cdc_init(void);
-    void rh_cdc_push(uint8_t byte);
-
     extern const uint8_t resin_palette_rgb[PALETTE_SIZE][3];
 
     uint8_t *rh_dma_framebuffer(void);
-
     uint8_t rh_input_held(void);
-
-    uint16_t rh_cdc_available(void);
-    uint8_t rh_cdc_read(void);
 #endif
