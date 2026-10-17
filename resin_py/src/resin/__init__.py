@@ -1,5 +1,7 @@
 from .core import (
     config,
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
     Rect,
 )
 
@@ -18,6 +20,8 @@ from .utils import (
 
 __all__ = [
     "config",
+    "SCREEN_WIDTH",
+    "SCREEN_HEIGHT",
     "Rect",
     "Button",
     "is_held",
