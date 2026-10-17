@@ -9,7 +9,12 @@ DIST_DIR="$PROJECT_ROOT/dist"
 
 BOARD_DIR="$PROJECT_ROOT/src/boards/SPRIG"
 RESIN_HW_DIR="$PROJECT_ROOT/src/resin_hw"
+MICROPYTHON_DIR="$PROJECT_ROOT/vendor/micropython"
 RESIN_PY_MANIFEST="$PROJECT_ROOT/src/resin_py/manifest.py"
+
+relativepath() {
+    realpath --relative-to="$1" "$2"
+}
 
 if [ "$CONFIG" == "release" ]; then
     BUILD_DIR="$PROJECT_ROOT/build/release"
@@ -25,7 +30,7 @@ mkdir -p "$OUT_DIR"
 
 echo "Generating CMake [$CONFIG] project"
 
-cmake -S "$PROJECT_ROOT/micropython/ports/rp2" \
+cmake -S "$MICROPYTHON_DIR/ports/rp2" \
     -B "$BUILD_DIR" \
     -G Ninja \
     -D MICROPY_BOARD=SPRIG \
@@ -42,4 +47,4 @@ echo "Build directory:  $BUILD_DIR"
 echo "Artifact output:  $OUT_DIR"
 echo ""
 echo "To build firmware:"
-echo "  cmake --build $BUILD_DIR"
+echo "  cmake --build $(relativepath "$PWD" "$BUILD_DIR")"
