@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
-PROJECT_ROOT="$SCRIPT_DIR/.."
+CONFIG="${1:-debug}"
 
-USER_C_MODULES_PATH="$PROJECT_ROOT/usermods/resin_hw"
-BOARD_DIR="$PROJECT_ROOT/boards"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+PROJECT_ROOT="$(realpath $SCRIPT_DIR/..)"
 DIST_DIR="$PROJECT_ROOT/dist"
 
-CONFIG="${1:-debug}"
+BOARD_DIR="$PROJECT_ROOT/src/boards/SPRIG"
+RESIN_HW_DIR="$PROJECT_ROOT/src/resin_hw"
+RESIN_PY_MANIFEST="$PROJECT_ROOT/src/resin_py/manifest.py"
 
 if [ "$CONFIG" == "release" ]; then
     BUILD_DIR="$PROJECT_ROOT/build/release"
@@ -28,15 +29,15 @@ cmake -S "$PROJECT_ROOT/micropython/ports/rp2" \
     -B "$BUILD_DIR" \
     -G Ninja \
     -D MICROPY_BOARD=SPRIG \
-    -D MICROPY_BOARD_DIR="$BOARD_DIR/SPRIG" \
-    -D USER_C_MODULES="$USER_C_MODULES_PATH" \
-    -D MICROPY_FROZEN_MANIFEST="$PROJECT_ROOT/resin_py/manifest.py" \
+    -D MICROPY_BOARD_DIR="$BOARD_DIR" \
+    -D USER_C_MODULES="$RESIN_HW_DIR" \
+    -D MICROPY_FROZEN_MANIFEST="$RESIN_PY_MANIFEST" \
     -D CMAKE_BUILD_TYPE="$BUILD_TYPE" \
     -D RESIN_DIST_DIR="$OUT_DIR" \
     -D RESIN_BUILD_TYPE="$(echo "$CONFIG" | tr '[:lower:]' '[:upper:]')"
 
 echo ""
-echo "Project generation completed for [$CONFIG]!"
+echo "Project generation completed - $CONFIG configuration"
 echo "Build directory:  $BUILD_DIR"
 echo "Artifact output:  $OUT_DIR"
 echo ""
