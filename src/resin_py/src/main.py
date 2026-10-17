@@ -12,8 +12,8 @@ def log(msg):
         logs.pop(0)
 
 def loop():
-    frame_delay_ms = 16
-
+    TARGET_FRAME_MS = 1000 / 60
+    
     while True:
         start_time = time.ticks_ms()
 
@@ -27,9 +27,10 @@ def loop():
             log(f"Loop error: {e}")
 
         elapsed = time.ticks_diff(time.ticks_ms(), start_time)
-        sleep_time = max(1, frame_delay_ms - elapsed)
+        sleep_time = int(TARGET_FRAME_MS - elapsed)
 
-        time.sleep_ms(sleep_time)
+        if sleep_time > 0:
+            time.sleep_ms(sleep_time)
 
 def start():
     try:
