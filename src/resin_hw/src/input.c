@@ -26,7 +26,7 @@
 
 #include "pico/stdlib.h"
 
-#include "resin_hw.h"
+#include "include/resin_hw.h"
 
 static const uint8_t button_pins[8] = {5, 6, 7, 8, 12, 13, 14, 15};
 

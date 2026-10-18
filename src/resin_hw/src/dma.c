@@ -8,7 +8,7 @@
 
 #include "pico/stdlib.h"
 
-#include "resin_hw.h"
+#include "include/resin_hw.h"
 
 #define SPI_TFT_PORT spi0
 

@@ -2,7 +2,7 @@
 #include "py/runtime.h"
 #include "py/mphal.h"
 
-#include "resin_hw.h"
+#include "include/resin_hw.h"
 
 static bool initialized = false;
 
