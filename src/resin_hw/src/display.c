@@ -147,6 +147,7 @@ void rh_display_init(void) {
 
     write_command(ST7735_COLMOD);
     write_data(0x05);
+    sleep_ms(10);
 
     write_command(ST7735_MADCTL);
     write_data(0x60);

@@ -33,6 +33,7 @@ echo "Generating CMake [$CONFIG] project"
 cmake -S "$MICROPYTHON_DIR/ports/rp2" \
     -B "$BUILD_DIR" \
     -G Ninja \
+    -D CMAKE_EXPORT_COMPILE_COMMANDS=ON \
     -D MICROPY_BOARD=SPRIG \
     -D MICROPY_BOARD_DIR="$BOARD_DIR" \
     -D USER_C_MODULES="$RESIN_HW_DIR" \
