@@ -2,35 +2,28 @@ import resin, resin_hw
 import _thread
 import time
 
-logs = []
-
-def log(msg):
-    global logs
-    logs.append(msg)
-
-    if len(logs) > 20:
-        logs.pop(0)
+FRAME_TIME_SECONDS = 1.0 / 60.0
 
 def loop():
-    TARGET_FRAME_MS = 1000 / 60
-    
+    last_frame_ms = time.ticks_ms()
+
     while True:
-        start_time = time.ticks_ms()
+        now = time.ticks_ms()
+        dt = (now - last_frame_ms) / 1000.0
+        last_frame_ms = now
 
         try:
-            resin_hw.clear_screen(resin.config.bg_color)
             resin.hardware.input.update()
-            main()
-            resin_hw.present()
+            resin.engine.run_frame(dt)
 
         except Exception as e:
-            log(f"Loop error: {e}")
+            resin.logger.log(f"Loop error: {e}")
 
-        elapsed = time.ticks_diff(time.ticks_ms(), start_time)
-        sleep_time = int(TARGET_FRAME_MS - elapsed)
+        elapsed = (time.ticks_ms() - last_frame_ms) / 1000.0
+        sleep_time = FRAME_TIME_SECONDS - elapsed
 
         if sleep_time > 0:
-            time.sleep_ms(sleep_time)
+            time.sleep_ms(max(1, int(sleep_time * 1000)))
 
 def start():
     try:
@@ -38,7 +31,7 @@ def start():
         _thread.start_new_thread(loop, ())
 
     except Exception as e:
-        log(f"Failed to start thread: {e}")
+        resin.logger.log(f"Failed to start thread: {e}")
 
 if __name__ == "__main__":
     start()

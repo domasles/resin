@@ -1,8 +1,14 @@
 from .core import (
-    config,
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     Rect,
+    Scene,
+    LogLevel,
+    StaticRect,
+    StaticBatch,
+    config,
+    engine,
+    logger,
 )
 
 from .hardware import (
@@ -19,14 +25,20 @@ from .utils import (
 
 
 __all__ = [
-    "config",
     "SCREEN_WIDTH",
     "SCREEN_HEIGHT",
     "Rect",
+    "Scene",
     "Button",
+    "LogLevel",
+    "StaticRect",
+    "StaticBatch",
+    "state",
+    "config",
+    "engine",
+    "logger",
     "is_held",
     "is_pressed",
     "is_released",
     "get_button_bitmask",
-    "state",
 ]

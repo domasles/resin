@@ -7,7 +7,7 @@
 static bool initialized = false;
 
 static mp_obj_t resin_hw_init(void) {
-    if (initialized) return mp_const_none;
+    if (initialized) return mp_const_true;
 
     rh_display_init();
     rh_dma_init();
@@ -16,7 +16,8 @@ static mp_obj_t resin_hw_init(void) {
     set_sys_clock_khz(200000, true);
 
     initialized = true;
-    return mp_const_none;
+
+    return mp_const_true;
 }
 
 static MP_DEFINE_CONST_FUN_OBJ_0(resin_hw_init_obj, resin_hw_init);

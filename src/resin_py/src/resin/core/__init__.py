@@ -7,14 +7,35 @@ from .constants import (
     SCREEN_HEIGHT,
 )
 
-from .rendering import (
+from .engine import (
+    engine,
+)
+
+from .geometry import (
     Rect,
+    StaticRect,
+    StaticBatch,
+)
+
+from .logger import (
+    LogLevel,
+    logger,
+)
+
+from .scene import (
+    Scene,
 )
 
 
 __all__ = [
-    "config",
     "SCREEN_WIDTH",
     "SCREEN_HEIGHT",
     "Rect",
+    "Scene",
+    "LogLevel",
+    "StaticRect",
+    "StaticBatch",
+    "config",
+    "engine",
+    "logger",
 ]
